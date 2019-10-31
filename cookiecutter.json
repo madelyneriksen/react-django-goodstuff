@@ -1,0 +1,4 @@
+{
+  "project_title": "My App",
+  "project_package": "{{ cookiecutter.project_title|lower|replace(' ', '_')}}"
+}

@@ -1,0 +1,4 @@
+cookiecutter
+django
+pytest
+pytest-cookies
