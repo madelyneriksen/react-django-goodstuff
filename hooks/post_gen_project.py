@@ -7,8 +7,17 @@ import subprocess
 
 CONTAINER = "{{ cookiecutter.project_package }}_web"
 DEV_CONTAINER_NAME = "{{ cookiecutter.project_package }}-dev:latest"
-DOCKER_BUILD = ["docker", "build", "-t", DEV_CONTAINER_NAME, "."]
 ENV = {"PWD": os.getcwd()}
+
+DOCKER_BUILD = [
+    "docker",
+    "build",
+    "-t",
+    DEV_CONTAINER_NAME,
+    "--build-arg",
+    "REQUIREMENTS=requirements.dev.txt",
+    "."
+]
 
 # Postgres startup times require it to go up first in a compose setting.
 DOCKER_COMPOSE_START_DB = [
