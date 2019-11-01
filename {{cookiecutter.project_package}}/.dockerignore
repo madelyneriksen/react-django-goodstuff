@@ -1,0 +1,6 @@
+*
+!requirements.txt
+!requirements.dev.txt
+!{{ cookiecutter.project_package }}
+!base
+!templates
