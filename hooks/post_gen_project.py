@@ -2,24 +2,44 @@
 
 
 import os
-from subprocess import run
+import subprocess
 
 
-PROD_CONTAINER = "{{ cookiecutter.project_package }}:latest"
-DEV_CONTAINER = "{{ cookiecutter.project_package }}-dev:latest"
-DOCKER_BUILD = ["docker", "build", "-t", DEV_CONTAINER, "."]
-DOCKER_MIGRATE = [
-    "docker",
+CONTAINER = "{{ cookiecutter.project_package }}_web"
+DEV_CONTAINER_NAME = "{{ cookiecutter.project_package }}-dev:latest"
+DOCKER_BUILD = ["docker", "build", "-t", DEV_CONTAINER_NAME, "."]
+ENV = {"PWD": os.getcwd()}
+
+# Postgres startup times require it to go up first in a compose setting.
+DOCKER_COMPOSE_START_DB = [
+    "docker-compose",
+    "up",
+    "-d",
+    "{{ cookiecutter.project_package }}_db",
+]
+
+DOCKER_COMPOSE_MAKEMIGRATIONS = [
+    "docker-compose",
     "run",
-    "-v",
-    f"{os.getcwd()}:/src/app",
-    DEV_CONTAINER,
+    CONTAINER,
     "python",
     "manage.py",
     "makemigrations",
 ]
 
+DOCKER_COMPOSE_MIGRATE = [
+    "docker-compose",
+    "run",
+    CONTAINER,
+    "python",
+    "manage.py",
+    "migrate",
+]
+
 
 if __name__ == "__main__":
+    run = lambda x: subprocess.run(x, env=ENV)
     run(DOCKER_BUILD)
-    run(DOCKER_MIGRATE)
+    run(DOCKER_COMPOSE_START_DB)
+    run(DOCKER_COMPOSE_MAKEMIGRATIONS)
+    run(DOCKER_COMPOSE_MIGRATE)

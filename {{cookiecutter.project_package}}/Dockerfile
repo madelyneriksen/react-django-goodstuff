@@ -9,8 +9,8 @@ RUN useradd app
 COPY ./requirements.* ./
 RUN pip install -r ${REQUIREMENTS}
 
-USER app
-
 COPY --chown=app:app . .
+
+USER app
 
 CMD python manage.py runserver

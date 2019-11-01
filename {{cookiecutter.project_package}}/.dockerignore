@@ -4,3 +4,5 @@
 !{{ cookiecutter.project_package }}
 !base
 !templates
+!manage.py
+!wait-for
