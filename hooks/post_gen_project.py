@@ -19,6 +19,12 @@ DOCKER_BUILD = [
     "."
 ]
 
+# Base container running command.
+RUN_CONTAINER = ["docker-compose", "run", CONTAINER]
+
+# Base management command.
+MANAGE = [*RUN_CONTAINER, "python", "manage.py"]
+
 # Postgres startup times require it to go up first in a compose setting.
 DOCKER_COMPOSE_START_DB = [
     "docker-compose",
@@ -26,24 +32,10 @@ DOCKER_COMPOSE_START_DB = [
     "-d",
     "{{ cookiecutter.project_package }}_db",
 ]
-
-DOCKER_COMPOSE_MAKEMIGRATIONS = [
-    "docker-compose",
-    "run",
-    CONTAINER,
-    "python",
-    "manage.py",
-    "makemigrations",
-]
-
-DOCKER_COMPOSE_MIGRATE = [
-    "docker-compose",
-    "run",
-    CONTAINER,
-    "python",
-    "manage.py",
-    "migrate",
-]
+DOCKER_COMPOSE_MAKEMIGRATIONS = [*MANAGE, "makemigrations"]
+DOCKER_COMPOSE_MIGRATE = [*MANAGE, "migrate"]
+DOCKER_COMPOSE_TEST = [*RUN_CONTAINER, "pytest"]
+DOCKER_COMPOSE_FORMAT = [*RUN_CONTAINER, "black ."]
 
 
 if __name__ == "__main__":
@@ -52,3 +44,4 @@ if __name__ == "__main__":
     run(DOCKER_COMPOSE_START_DB)
     run(DOCKER_COMPOSE_MAKEMIGRATIONS)
     run(DOCKER_COMPOSE_MIGRATE)
+    run(DOCKER_COMPOSE_TEST)

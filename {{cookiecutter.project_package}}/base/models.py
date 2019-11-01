@@ -14,6 +14,7 @@ class BaseModel(models.Model):
 
     class Meta:
         """Metadata."""
+
         abstract = True
 
 
@@ -22,4 +23,5 @@ class User(BaseModel, AbstractUser):
 
     class Meta:
         """Metadata."""
+
         db_table = "users"
