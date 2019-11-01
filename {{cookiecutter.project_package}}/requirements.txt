@@ -1,3 +1,4 @@
 psycopg2-binary
 django
 django-allauth
+dj-database-url

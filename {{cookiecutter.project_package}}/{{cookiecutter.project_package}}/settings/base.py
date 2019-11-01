@@ -1,6 +1,7 @@
 """Base (shared) settings for {{cookiecutter.project_title}}
 """
 
+import dj_database_url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -86,14 +87,7 @@ WSGI_APPLICATION = "{{ cookiecutter.project_package }}.wsgi.application"
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "{{ cookiecutter.project_package }}",
-        "HOST": "{{ cookiecutter.project_package }}_db",
-        "PORT": 5432,
-        "USER": "django",
-        "PASSWORD": "django",
-    }
+    "default": dj_database_url.parse(os.getenv("DATABASE_URL", "postgres://postgres@db/django"))
 }
 
 
