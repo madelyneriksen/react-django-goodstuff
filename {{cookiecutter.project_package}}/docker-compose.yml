@@ -7,6 +7,7 @@ services:
     environment:
       PYTHONUNBUFFERED: "True"
       DATABASE_URL: postgres://django:django@{{ cookiecutter.project_package }}_db:5432/{{ cookiecutter.project_package }}
+      REDIS_URL: redis://{{ cookiecutter.project_package }}_redis:6379/0
     volumes:
       - "${PWD}:/src/app"
     command: |

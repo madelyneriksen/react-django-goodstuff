@@ -89,15 +89,23 @@ WSGI_APPLICATION = "{{ cookiecutter.project_package }}.wsgi.application"
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.parse(os.getenv("DATABASE_URL", "postgres://postgres@db/django"))
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL", "postgres://postgres@db/django")
+    )
+}
+
+# Caching
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.RedisCache",
+        "LOCATION": os.getenv("REDIS_URL", "redis://redis:6379/0"),
+    }
 }
 
 
 # Rest Framework
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": [
-        "django_filters.rest_framework.DjangoFilterBackend",
-    ]
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend",]
 }
 
 # Internationalization
