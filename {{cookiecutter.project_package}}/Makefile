@@ -14,7 +14,8 @@ test:
 
 lint:
 	docker run --rm ${FRONTEND_CONTAINER} npm run lint
-	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} black --check .
+	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} \
+	  black --ignore frontend --check .
 
 migrations:
 	docker-compose run {{ cookiecutter.project_package }}_web python manage.py makemigrations

@@ -13,6 +13,9 @@ services:
     depends_on:
       - {{ cookiecutter.project_package }}_db
       - {{ cookiecutter.project_package }}_redis
+      - {{ cookiecutter.project_package }}_frontend
+    command: |
+      gunicorn {{ cookiecutter.project_package }}.wsgi --bind 0.0.0.0:8000 --reload
   {{ cookiecutter.project_package }}_db:
     image: postgres:alpine
     ports:
@@ -25,3 +28,9 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+  {{ cookiecutter.project_package }}_frontend:
+    image: {{ cookiecutter.project_package }}_app:latest
+    volumes:
+      - "${PWD}/frontend:/src/app"
+    command: |
+      npm start
