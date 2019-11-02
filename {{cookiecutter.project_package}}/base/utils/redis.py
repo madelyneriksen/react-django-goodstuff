@@ -11,3 +11,20 @@ from redis import Redis
 def connection():
     """Redis connection singleton factory."""
     return Redis(os.getenv("REDIS_URL", "redis://redis:6379/0"))
+
+
+class RedisMixin:
+    """Mixin to add Redis support to a class.
+
+    Usage:
+    >>> class MyClass(RedisMixin):
+    >>>     pass
+    >>>
+    >>> my_instance = MyClass()
+    >>> my_instance.redis.get("some_key")
+    """
+
+    @property
+    def redis(self) -> Redis:
+        """Get the redis instance."""
+        return connection()
