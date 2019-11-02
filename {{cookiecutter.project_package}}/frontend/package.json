@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "Frontend for {{ cookiecutter.project_title }}",
   "scripts": {
-    "test": "jest",
-    "build": "parcel build --no-autoinstall src/index.jsx",
-    "start": "parcel watch --no-autoinstall src/index.jsx",
+    "test": "jest --coverage",
+    "build": "parcel build --public-url /static --no-autoinstall src/index.jsx",
+    "start": "parcel watch --public-url /static --no-autoinstall --hmr-port 8080 src/index.jsx",
     "format": "eslint src/ --fix || echo 'Cannot fix all errors.'",
     "lint": "eslint src/"
   },
