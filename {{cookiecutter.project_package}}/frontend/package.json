@@ -4,7 +4,9 @@
   "description": "Frontend for {{ cookiecutter.project_title }}",
   "scripts": {
     "test": "jest && eslint",
-    "build": "parcel build src/index.js"
+    "build": "parcel build src/index.js",
+    "format": "eslint src/ --fix || echo 'Cannot fix all errors.'",
+    "lint": "eslint src/"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.6.3",
