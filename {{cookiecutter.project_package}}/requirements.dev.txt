@@ -1,5 +1,6 @@
 pytest
 pytest-django
 pytest-coverage
+wait-for-it
 black
 -r requirements.txt

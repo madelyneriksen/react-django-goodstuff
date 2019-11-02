@@ -7,18 +7,21 @@ DEV_BACKEND_CONTAINER := {{ cookiecutter.project_package }}_api_dev
 
 
 test:
-	docker-compose run {{ cookiecutter.project_package }}_web /bin/bash -c "pytest && black --check ."
+	docker-compose run {{ cookiecutter.project_package }}_web \
+	  /bin/bash -c \
+	  "wait-for-it --service {{ cookiecutter.project_package }}_db:5432 && pytest"
 	docker run --rm ${FRONTEND_CONTAINER} npm test
 
 lint:
 	docker run --rm ${FRONTEND_CONTAINER} npm run lint
+	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} black --check .
 
 migrations:
 	docker-compose run {{ cookiecutter.project_package }}_web python manage.py makemigrations
 
 format:
-	cd frontend && npm run format
-	black .
+	docker run --rm -v "${PWD}/frontend:/src/app" ${FRONTEND_CONTAINER} npm run format
+	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} black .
 
 build:
 	docker build -t ${FRONTEND_CONTAINER} -f docker/Dockerfile.app .

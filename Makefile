@@ -3,6 +3,7 @@ test: teardown
 	rm -rf output
 	mkdir -p output
 	cd output && cookiecutter .. --no-input
+	cd output/my_app && make format
 	cd output/my_app && make lint
 	cd output/my_app && make test
 
