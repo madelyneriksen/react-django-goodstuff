@@ -1,7 +1,7 @@
 """Tests for users model."""
 
 
-from base.models import User
+from {{cookiecutter.project_package}}.base.models import User
 
 
 def test_user_tablename():

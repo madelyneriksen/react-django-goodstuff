@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "django_redis",
-    "base",
+    "{{ cookiecutter.project_package }}.base",
 ]
 
 # Authentication settings

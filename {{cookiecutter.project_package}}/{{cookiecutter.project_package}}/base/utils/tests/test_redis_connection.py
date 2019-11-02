@@ -1,8 +1,8 @@
 """Test the redis connection is a singleton."""
 
 
-from base.utils.redis import connection as rconn
-from base.utils.redis import RedisMixin
+from {{cookiecutter.project_package}}.base.utils.redis import connection as rconn
+from {{cookiecutter.project_package}}.base.utils.redis import RedisMixin
 
 
 def test_connection_is_singleton():
