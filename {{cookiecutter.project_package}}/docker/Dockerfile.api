@@ -1,13 +1,5 @@
 # Build + minify frontend assets.
-FROM node AS frontend
-WORKDIR /src/app
-
-COPY ./frontend/package.json ./frontend/package-lock.json ./
-RUN npm ci
-
-COPY ./frontend ./
-
-RUN npm run build
+FROM {{ cookiecutter.project_package }}_app AS frontend
 
 # Python application container.
 FROM python:3.7 AS app
