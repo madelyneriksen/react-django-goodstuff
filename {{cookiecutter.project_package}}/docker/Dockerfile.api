@@ -8,15 +8,17 @@ WORKDIR /src/app
 
 ARG REQUIREMENTS=requirements.txt
 
-RUN useradd app
+RUN useradd app && chown -R app:app .
 
 COPY ./requirements.* ./
 RUN pip install -r ${REQUIREMENTS}
 
 COPY --chown=app:app . .
 
-COPY --from=frontend --chown=app:app /src/app/dist ./public
+COPY --from=frontend --chown=app:app /src/app/dist ./frontend/dist
 
 USER app
+
+RUN mkdir -p public && python manage.py collectstatic
 
 CMD python manage.py runserver
