@@ -6,6 +6,7 @@ services:
       - "8000:8000"
     environment:
       PYTHONUNBUFFERED: "True"
+      DJANGO_SETTINGS_MODULE: {{ cookiecutter.project_package }}.settings.dev
       DATABASE_URL: postgres://django:django@{{ cookiecutter.project_package }}_db:5432/{{ cookiecutter.project_package }}
       REDIS_URL: redis://{{ cookiecutter.project_package }}_redis:6379/0
     volumes:

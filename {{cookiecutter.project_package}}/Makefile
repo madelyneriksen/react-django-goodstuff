@@ -20,9 +20,8 @@ lint:
 	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} \
 	  black --exclude frontend --check .
 
-migrations:
-	$(COMPOSE) run {{ cookiecutter.project_package }}_web \
-	  /bin/bash -c "${WAIT_FOR_DB} && python manage.py makemigrations"
+shell:
+	$(COMPOSE) run {{ cookiecutter.project_package }}_web /bin/bash
 
 format:
 	docker run --rm -v "${PWD}/frontend:/src/app" ${FRONTEND_CONTAINER} npm run format
