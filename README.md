@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h3 align="center">React Django Goodstuff</h3>
+  <h2 align="center">React Django Goodstuff</h2>
   <p align="center">
     A CookieCutter template for fullstack, modern web applications.
     <br />
