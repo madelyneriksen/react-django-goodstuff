@@ -8,7 +8,7 @@ test: teardown
 	cd output/my_app && make lint
 
 teardown:
-	docker-compose -f output/my_app/docker-compose.yml down -v || echo "Already Dead!"
+	docker-compose -f output/my_app/docker/docker-compose.yml down -v || echo "Already Dead!"
 
 start:
-	cd output/my_app && docker-compose up
+	cd output/my_app && make start

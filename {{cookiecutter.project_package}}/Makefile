@@ -2,14 +2,17 @@ FRONTEND_CONTAINER := {{ cookiecutter.project_package }}_app:latest
 BACKEND_CONTAINER := {{ cookiecutter.project_package }}_api:latest
 DEV_BACKEND_CONTAINER := {{ cookiecutter.project_package }}_api_dev
 
+COMPOSE = docker-compose -f docker/docker-compose.yml
+WAIT_FOR_DB = wait-for-it --service {{ cookiecutter.project_package }}_db:5432
+
 
 .PHONY: build test lint migrations format
 
 
 test:
-	docker-compose run {{ cookiecutter.project_package }}_web \
+	$(COMPOSE) run {{ cookiecutter.project_package }}_web \
 	  /bin/bash -c \
-	  "wait-for-it --service {{ cookiecutter.project_package }}_db:5432 && pytest"
+	  "${WAIT_FOR_DB} && pytest"
 	docker run --rm ${FRONTEND_CONTAINER} npm test
 
 lint:
@@ -18,7 +21,8 @@ lint:
 	  black --exclude frontend --check .
 
 migrations:
-	docker-compose run {{ cookiecutter.project_package }}_web python manage.py makemigrations
+	$(COMPOSE) run {{ cookiecutter.project_package }}_web \
+	  /bin/bash -c "${WAIT_FOR_DB} && python manage.py makemigrations"
 
 format:
 	docker run --rm -v "${PWD}/frontend:/src/app" ${FRONTEND_CONTAINER} npm run format
@@ -30,3 +34,9 @@ build:
 	docker build -t ${DEV_BACKEND_CONTAINER} \
 	  --build-arg REQUIREMENTS=requirements.dev.txt \
 	  -f docker/Dockerfile.api .
+
+teardown:
+	$(COMPOSE) down -v
+
+start:
+	$(COMPOSE) up
