@@ -2,7 +2,7 @@
 
 
 import pytest
-from base.models import User
+from {{ cookiecutter.project_package}}.base.models import User
 
 
 @pytest.mark.django_db
