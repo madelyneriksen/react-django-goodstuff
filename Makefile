@@ -3,7 +3,8 @@ test: teardown
 	rm -rf output
 	mkdir -p output
 	cd output && cookiecutter .. --no-input
-	cd {{cookiecutter.project_package}} && black . --check
+	cd output/my_app && make lint
+	cd output/my_app && make test
 
 teardown:
 	docker-compose -f output/my_app/docker-compose.yml down -v || echo "Already Dead!"
