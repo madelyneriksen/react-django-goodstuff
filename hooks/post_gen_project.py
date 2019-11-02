@@ -35,6 +35,8 @@ DOCKER_COMPOSE_START_DB = [
 DOCKER_COMPOSE_MAKEMIGRATIONS = [*MANAGE, "makemigrations"]
 DOCKER_COMPOSE_MIGRATE = [*MANAGE, "migrate"]
 DOCKER_COMPOSE_TEST = [*RUN_CONTAINER, "pytest"]
+
+# Generated migrations might not be formatted.
 DOCKER_COMPOSE_FORMAT = [*RUN_CONTAINER, "black ."]
 
 
