@@ -1,4 +1,7 @@
 {
   "project_title": "My App",
-  "project_package": "{{ cookiecutter.project_title|lower|replace(' ', '_')}}"
+  "project_package": "{{ cookiecutter.project_title|lower|replace(' ', '_')}}",
+  "_copy_without_render": [
+    "*.html"
+  ]
 }
