@@ -18,8 +18,7 @@ test: build
 
 lint:
 	docker run --rm ${FRONTEND_CONTAINER} npm run lint
-	docker run --rm -v "${PWD}:/src/app" ${DEV_BACKEND_CONTAINER} \
-	  black --exclude frontend --check .
+	docker run --rm ${DEV_BACKEND_CONTAINER} black --exclude frontend --check .
 
 shell:
 	$(COMPOSE) run {{ cookiecutter.project_package }}_web /bin/bash
