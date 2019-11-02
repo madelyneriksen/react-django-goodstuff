@@ -21,4 +21,4 @@ USER app
 
 RUN mkdir -p public && python manage.py collectstatic
 
-CMD python manage.py runserver
+CMD gunicorn {{ cookiecutter.project_package }}.wsgi --bind 0.0.0.0:8000

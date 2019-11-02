@@ -6,3 +6,5 @@ dj-database-url
 djangorestframework
 django-filter
 django-redis
+whitenoise
+gunicorn
