@@ -120,7 +120,7 @@ make shell
 
 #### Abstract Base Model
 
-A `BaseModel` is included in `base.models` that uses a UUID field instead of an auto-incrementing integer. Oftentimes, this plays better with a single page application than an auto-incrementing ID does.
+A `BaseModel` is included in `app.base.models` that uses a UUID field instead of an auto-incrementing integer. Oftentimes, this plays better with a single page application than an auto-incrementing ID does.
 
 You can use the base model like you would the standard `models.Model` class in Django:
 
@@ -135,7 +135,7 @@ Interacting with Redis directly is often a requirement, so a couple utilities ar
 
 
 ```python
-from base.utils.redis import connection, RedisMixin
+from my_app.base.utils.redis import connection, RedisMixin
 
 # connection() creates a singleton instance
 redis = connection()
