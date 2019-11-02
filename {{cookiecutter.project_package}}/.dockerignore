@@ -6,4 +6,6 @@
 !templates
 !manage.py
 !frontend
+!pytest.ini
+!conftest.py
 frontend/node_modules
