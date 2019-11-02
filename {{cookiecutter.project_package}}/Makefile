@@ -9,8 +9,9 @@ WAIT_FOR_DB = wait-for-it --service {{ cookiecutter.project_package }}_db:5432
 .PHONY: build test lint migrations format
 
 
-test:
-	$(COMPOSE) run {{ cookiecutter.project_package }}_web \
+test: build
+	docker-compose -f docker/docker-compose.test.yml \
+	  run {{ cookiecutter.project_package }}_web \
 	  /bin/bash -c \
 	  "${WAIT_FOR_DB} && pytest"
 	docker run --rm ${FRONTEND_CONTAINER} npm test

@@ -1,0 +1,40 @@
+# In CI/CD pipelines, we forego the mounting of volumes.
+version: "3"
+services:
+  {{ cookiecutter.project_package }}_web:
+    image: {{ cookiecutter.project_package }}_api_dev:latest
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONUNBUFFERED: "True"
+      DJANGO_SETTINGS_MODULE: {{ cookiecutter.project_package }}.settings.dev
+      DATABASE_URL: postgres://django:django@{{ cookiecutter.project_package }}_db:5432/{{ cookiecutter.project_package }}
+      REDIS_URL: redis://{{ cookiecutter.project_package }}_redis:6379/0
+    depends_on:
+      - {{ cookiecutter.project_package }}_db
+      - {{ cookiecutter.project_package }}_redis
+      - {{ cookiecutter.project_package }}_frontend
+    command: |
+      gunicorn {{ cookiecutter.project_package }}.wsgi --bind 0.0.0.0:8000 --reload
+  {{ cookiecutter.project_package }}_db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: django
+      POSTGRES_USER: django
+      POSTGRES_DB: {{ cookiecutter.project_package }}
+    logging:
+      driver: none
+  {{ cookiecutter.project_package }}_redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    logging:
+      driver: none
+  {{ cookiecutter.project_package }}_frontend:
+    image: {{ cookiecutter.project_package }}_app:latest
+    ports:
+      - "8080:8080"
+    command: |
+      npm start
