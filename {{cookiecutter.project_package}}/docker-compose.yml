@@ -24,12 +24,18 @@ services:
       POSTGRES_PASSWORD: django
       POSTGRES_USER: django
       POSTGRES_DB: {{ cookiecutter.project_package }}
+    logging:
+      driver: none
   {{ cookiecutter.project_package }}_redis:
     image: redis:alpine
     ports:
       - "6379:6379"
+    logging:
+      driver: none
   {{ cookiecutter.project_package }}_frontend:
     image: {{ cookiecutter.project_package }}_app:latest
+    ports:
+      - "8080:8080"
     volumes:
       - "${PWD}/frontend:/src/app"
     command: |
