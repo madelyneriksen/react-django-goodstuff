@@ -5,4 +5,4 @@ django-allauth
 dj-database-url
 djangorestframework
 django-filter
-django-redis-cache
+django-redis

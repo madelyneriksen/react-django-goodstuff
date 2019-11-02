@@ -4,13 +4,15 @@
 import os
 
 from functools import lru_cache
+
+from django_redis import get_redis_connection
 from redis import Redis
 
 
 @lru_cache(maxsize=1)
 def connection():
     """Redis connection singleton factory."""
-    return Redis(os.getenv("REDIS_URL", "redis://redis:6379/0"))
+    return get_redis_connection("default")
 
 
 class RedisMixin:
