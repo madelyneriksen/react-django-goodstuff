@@ -6,3 +6,4 @@
 !templates
 !manage.py
 !frontend
+frontend/node_modules

@@ -1,18 +1,23 @@
 {
-  "name": "{{ cookiecutter.project_package }}_frontend",
+  "name": "frontend",
   "version": "0.0.0",
   "description": "Frontend for {{ cookiecutter.project_title }}",
   "scripts": {
-    "test": "jest && eslint",
-    "build": "parcel build src/index.js",
+    "test": "jest",
+    "build": "parcel build --no-autoinstall src/index.jsx",
     "format": "eslint src/ --fix || echo 'Cannot fix all errors.'",
     "lint": "eslint src/"
+  },
+  "dependencies": {
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-jest": "^24.9.0",
     "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
