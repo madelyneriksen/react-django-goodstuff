@@ -1,18 +1,6 @@
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <h2 align="center">React Django Goodstuff</h2>
-  <p align="center">
-    A CookieCutter template for modern, fullstack web applications.
-    <br />
-    <br />
-    <a href="https://github.com/madelyneriksen/react-django-goodstuff/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/madelyneriksen/react-django-goodstuff/issues">Request Feature</a>
-  </p>
-</p>
+# React Django GoodStuff
 
-
+A [CookieCutter](https://github.com/cookiecutter/cookiecutter) template for modern, full-stack web applications.
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
