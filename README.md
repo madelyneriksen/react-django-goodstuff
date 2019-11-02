@@ -37,6 +37,7 @@ A major barrier to creating new projects is having to create the same basic infr
 * Frontend powered by [React.js](https://reactjs.org/) ✨
 * Python backend with [Django](https://djangoproject.com/) and [Django Rest Framework](https://www.django-rest-framework.org/) 🐍
 * Container-first development- entire project built in Docker 🐳
+* Built-in Github Actions for Integration & Unit Tests
 * [Postgres](https://www.postgresql.org/) as the relational database 🐘
 * [Redis](https://redis.io/) session and storage for _fast_ caching. 🚀
 * [Django Allauth](https://github.com/pennersr/django-allauth) for easy social logins.
