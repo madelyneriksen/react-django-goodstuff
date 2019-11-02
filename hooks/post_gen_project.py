@@ -9,15 +9,7 @@ CONTAINER = "{{ cookiecutter.project_package }}_web"
 DEV_CONTAINER_NAME = "{{ cookiecutter.project_package }}-dev:latest"
 ENV = {"PWD": os.getcwd()}
 
-DOCKER_BUILD = [
-    "docker",
-    "build",
-    "-t",
-    DEV_CONTAINER_NAME,
-    "--build-arg",
-    "REQUIREMENTS=requirements.dev.txt",
-    "."
-]
+DOCKER_BUILD = ["make", "build"]
 
 # Base container running command.
 RUN_CONTAINER = ["docker-compose", "run", CONTAINER]

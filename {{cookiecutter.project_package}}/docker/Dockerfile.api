@@ -2,7 +2,7 @@
 FROM node AS frontend
 WORKDIR /src/app
 
-COPY ./package.* ./
+COPY ./frontend/package.json ./frontend/package-lock.json ./
 RUN npm ci
 
 COPY ./frontend ./
