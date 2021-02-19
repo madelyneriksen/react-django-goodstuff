@@ -14,7 +14,7 @@
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-env": "^7.12.17",
     "@babel/preset-react": "^7.12.13",
     "babel-jest": "^26.6.3",
     "enzyme": "^3.11.0",
